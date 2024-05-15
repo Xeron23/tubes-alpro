@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main(){
-	var nama = "slebew"
-	fmt.Println(nama)
+func main() {
+	var nama = "udin"
+	fmt.Print("nama saya adalam", nama)
 }
