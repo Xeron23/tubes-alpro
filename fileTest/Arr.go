@@ -103,19 +103,21 @@ func Interface() {
 }
 
 
-func HapusData(Arr *Arr, n int, k *int, nmas string) {
-	Find(Arr, n, k,nmas)
-	if *k!=-1 {
+func HapusData(Arr *Arr, n *int, k *int, nmas string) {
+	var result int
+	result = Find(*Arr, *n, k,nmas)
+	if result!=-1 {
 		fmt.Println("Data ditemukan")
-		for i := *k; i < n-1; i++ {
+		for i := result; i < *n-1; i++ {
 			Arr[i] = Arr[i+1]
 		}
+		*n--
 	}else {
 		fmt.Print("Data tidak di temukan")
 	}
 }
 
-func Find(Arr *Arr, n int, k *int, nmas string) {
+func Find(Arr Arr, n int, k *int, nmas string)int {
 	*k = -1
 	for i := 0; i < n; i++ {
 		if Arr[i].nama==nmas {
@@ -123,4 +125,5 @@ func Find(Arr *Arr, n int, k *int, nmas string) {
 			break
 		}
 	}
+	return *k
 }

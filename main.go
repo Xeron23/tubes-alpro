@@ -44,7 +44,7 @@ func main() {
 			var k int
 			fmt.Print("Masukan Nama Pasien yang ingin diubah: ")
 			fmt.Scan(&namPasien)
-		fileTest.HapusData(&dataPasien, banPasien, &k, namPasien)
+			fileTest.HapusData(&dataPasien, &banPasien, &k, namPasien)
 		}else {
 			fileTest.PrintData(dataPasien, banPasien)
 		}
