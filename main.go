@@ -6,7 +6,7 @@ import (
 )
 
 var aksi, banPasien int
-var dataPasien fileTest.Arr
+var dataPasien program.Arr
 var namPasien string
 var adaPasien bool
 
@@ -17,13 +17,13 @@ func main() {
 		if aksi == 1 {
 			fmt.Print("Berapa banyak pasien yang ingin di tambahkan: ")
 			fmt.Scan(&banPasien)
-			fileTest.InputData(&dataPasien, banPasien)
+			program.InputData(&dataPasien, banPasien)
 			fmt.Print("Data yang masukan telah terkirim ke sistem\n\n")
 		} else if aksi == 2 {
 			adaPasien = false
 			fmt.Print("Masukan Nama Pasien yang ingin dicari: ")
 			fmt.Scan(&namPasien)
-			fileTest.FindData(&dataPasien, banPasien, namPasien, &adaPasien)
+			program.FindData(&dataPasien, banPasien, namPasien, &adaPasien)
 			if adaPasien {
 				fmt.Println("Data pasien ditemukan")
 			} else if !adaPasien && banPasien == 0 {
@@ -35,7 +35,7 @@ func main() {
 			adaPasien = false
 			fmt.Print("Masukan Nama Pasien yang ingin diubah: ")
 			fmt.Scan(&namPasien)
-			fileTest.EditData(&dataPasien, banPasien, namPasien, &adaPasien)
+			program.EditData(&dataPasien, banPasien, namPasien, &adaPasien)
 			if adaPasien {
 				fmt.Print("Data berhasil di ubah\n")
 			} else {
@@ -45,9 +45,9 @@ func main() {
 			var k int
 			fmt.Print("Masukan Nama Pasien yang ingin diubah: ")
 			fmt.Scan(&namPasien)
-			fileTest.HapusData(&dataPasien, &banPasien, &k, namPasien)
+			program.HapusData(&dataPasien, &banPasien, &k, namPasien)
 		} else {
-			fileTest.PrintData(dataPasien, banPasien)
+			program.PrintData(dataPasien, banPasien)
 		}
 	}
 
