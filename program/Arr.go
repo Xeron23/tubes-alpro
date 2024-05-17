@@ -62,6 +62,18 @@ func DeleteData(Arr *Arr, n *int, nama string) {
 		}
 	}
 }
+func DeleteDat(Arr *Arr, n *int, nama string, k *int) {
+	var data int
+	data = Find(*Arr, *n, k, nama)
+	if data != -1 {
+		for i := data; i < *n; i++ {
+			Arr[i] = Arr[i+1]
+		}
+		*n--
+	} else {
+
+	}
+}
 
 func FindData(Arr *Arr, n int, namaS string, pas *bool) {
 	for i := 0; i < n && !*pas; i++ {
@@ -87,7 +99,7 @@ func EditData(arr *Arr, n int, namaS string, pas *bool) {
 			fmt.Print("Masukan asal pasien: ")
 			fmt.Scan(&inStr)
 			if inStr != "-" {
-				arr[i].nama = inStr
+				arr[i].asal = inStr
 			}
 
 			fmt.Print("Masukan umur pasien: ")
@@ -135,17 +147,22 @@ func PrintData(arr Arr, n int) {
 	}
 }
 
-func urutAntrian(Arr *Arr, n int) {
-	var temp int
+func printNama(Arr Arr, n int) {
 	for i := 0; i < n; i++ {
-		temp = i+1
-		for j := temp; j <n; j++ {
-			if Arr[i].keparahan<Arr[j].keparahan {
+		fmt.Printf("%d. Nama: %s Gol: %s\n", i+1, Arr[i].nama, Arr[i].golongan_riwayat_penyakit)
+	}
+}
+func UrutAntrian(Arr *Arr, n int) {
+	for i := 0; i < n-1; i++ {
+		for j := i + 1; j < n; j++ {
+			if Arr[i].keparahan < Arr[j].keparahan {
+				temps := Arr[i]
 				Arr[i] = Arr[j]
-				break
+				Arr[j] = temps
 			}
 		}
 	}
+	printNama(*Arr, n)
 }
 
 func Interface() {
@@ -156,10 +173,11 @@ func Interface() {
 	fmt.Println("*         Di Klinik Tong Fung       *")
 	fmt.Println("*       =======================     *")
 	fmt.Println("*       1. Pendaftaran Pasien       *")
-	fmt.Println("*       2. Mencari Pasien           *")
-	fmt.Println("*       3. Mengedit Data Pasien     *")
-	fmt.Println("*       4. Menghapus Data Pasien    *")
-	fmt.Println("*       5. Mengurutkan Pasien       *")
+	fmt.Println("*       2. Cari Pasien              *")
+	fmt.Println("*       3. Edit Data Pasien         *")
+	fmt.Println("*       4. Hapus Data Pasien        *")
+	fmt.Println("*       5. Urutan pemeriksaan       *")
+	fmt.Println("*       6. Hentikan program         *")
 	fmt.Println("*       ========================    *")
 	fmt.Println("*                                   *")
 	fmt.Println("*************************************")
@@ -170,13 +188,13 @@ func HapusData(Arr *Arr, n *int, k *int, nmas string) {
 	var result int
 	result = Find(*Arr, *n, k, nmas)
 	if result != -1 {
-		fmt.Println("Data ditemukan")
+		fmt.Println("Data berhasil di hapus\n")
 		for i := result; i < *n-1; i++ {
 			Arr[i] = Arr[i+1]
 		}
 		*n--
 	} else {
-		fmt.Print("Data tidak di temukan")
+		fmt.Print("Data tidak di temukan\n")
 	}
 }
 
