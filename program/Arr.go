@@ -86,7 +86,7 @@ var Datas Arr
 // 	}
 // }
 
-func FindData(Arr *Arr, n int, namaS string, pas *bool) {
+func FindDataNama(Arr *Arr, n int, namaS string, pas *bool) {
 	for i := 0; i < n && !*pas; i++ {
 		if Arr[i].nama == namaS {
 			fmt.Println("Data ditemukan")
@@ -99,6 +99,18 @@ func FindData(Arr *Arr, n int, namaS string, pas *bool) {
 	}
 }
 
+func FindDataGol(Arr *Arr, n int, gol string, pas *bool) {
+	for i := 0; i < n && !*pas; i++ {
+		if Arr[i].golongan_riwayat_penyakit == gol {
+			fmt.Println("Data ditemukan")
+			fmt.Printf("%s %d %s %s %s", Arr[i].nama, Arr[i].umur, Arr[i].asal, Arr[i].tanggalLahir, Arr[i].golongan_riwayat_penyakit)
+			*pas = true
+		}
+	}
+	if !*pas {
+		fmt.Println("Data tidak ditemukan")
+	}
+}
 func EditData(arr *Arr, n int, namaS string, pas *bool) {
 	var inStr string
 	var inInt int

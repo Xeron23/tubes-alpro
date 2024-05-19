@@ -10,7 +10,7 @@ var dataPasien program.Arr
 var namPasien string
 var adaPasien bool
 var henti bool
-
+var data string
 func main() {
 	henti = true
 	banPasien = 0
@@ -23,10 +23,19 @@ func main() {
 
 		} else if aksi == 2 {
 			adaPasien = false
-			fmt.Print("Masukan Nama Pasien yang ingin dicari: ")
-			fmt.Scan(&namPasien)
-			program.FindData(&dataPasien, banPasien, namPasien, &adaPasien)
-			fmt.Println()
+			fmt.Print("SIlahkan pilih berdasarkan nama atau riwayat penyakit")
+			fmt.Scan(&data)
+			if data == "nama" {
+				fmt.Print("Masukan Nama Pasien yang ingin dicari: ")
+				fmt.Scan(&namPasien)
+				program.FindDataNama(&dataPasien, banPasien, namPasien, &adaPasien)
+				fmt.Println()
+			}else {
+				fmt.Print("Masukan riwayat penyakit Pasien yang ingin dicari: ")
+				fmt.Scan(&namPasien)
+				program.FindDataGol(&dataPasien, banPasien, namPasien, &adaPasien)
+			}
+			
 			
 		} else if aksi == 3 {
 			adaPasien = false
