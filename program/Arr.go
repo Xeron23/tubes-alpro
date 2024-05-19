@@ -17,9 +17,6 @@ func InputData(arr *Arr, n int, k *int) {
 	valid = true
 	var i int
 	for i = *k; i < n+*k && valid; i++ {
-		fmt.Println("===================")
-		fmt.Printf("    Pasien ke-%d   \n", i+1)
-		fmt.Println("===================")
 		fmt.Print("Masukan nama pasien: ")
 		fmt.Scan(&arr[i].nama)
 		fmt.Print("Masukan asal pasien: ")

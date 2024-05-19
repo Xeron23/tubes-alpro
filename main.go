@@ -10,19 +10,16 @@ var dataPasien program.Arr
 var namPasien string
 var adaPasien bool
 var henti bool
-var k int
-var n int
 
 func main() {
 	henti = true
-	k = 0
+	banPasien = 0
 	for henti {
 		program.Interface()
 		fmt.Scan(&aksi)
 		if aksi == 1 {
-			fmt.Print("Berapa banyak pasien yang ingin di tambahkan: ")
-			fmt.Scan(&banPasien)
-			program.InputData(&dataPasien, banPasien, &k)
+			fmt.Println("SILAHKAN MASUKAN DATA PASIEN")
+			program.InputData(&dataPasien,1, &banPasien)
 			fmt.Print("\n\nData yang masukan telah terkirim ke sistem\n\n")
 			fmt.Print(banPasien)
 		} else if aksi == 2 {
@@ -37,7 +34,7 @@ func main() {
 				fmt.Println("Data pasien tidak ada, silahkan masukan pasien")
 				fmt.Print("Berapa banyak pasien yang ingin di tambahkan: ")
 				fmt.Scan(&banPasien)
-				program.InputData(&dataPasien, banPasien, &k)
+				program.InputData(&dataPasien,1, &banPasien)
 				fmt.Print("\n\nData yang masukan telah terkirim ke sistem\n\n")
 			} else {
 				fmt.Println("Data pasien tidak ada")
@@ -59,11 +56,11 @@ func main() {
 			fmt.Scan(&namPasien)
 			program.HapusData(&dataPasien, &banPasien, &k, namPasien)
 		} else if aksi == 5 {
-			program.UrutAntrian(&dataPasien, k)
+			program.UrutAntrian(&dataPasien, banPasien)
 		} else if aksi==6{
 			henti = false
 		}else {
-			program.PrintData(dataPasien, k)
+			program.PrintData(dataPasien, banPasien)
 		}
 	}
 
