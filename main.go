@@ -23,7 +23,7 @@ func main() {
 
 		} else if aksi == 2 {
 			adaPasien = false
-			fmt.Print("SIlahkan pilih berdasarkan nama atau riwayat penyakit")
+			fmt.Print("Silahkan pilih berdasarkan nama atau riwayat penyakit: ")
 			fmt.Scan(&data)
 			if data == "nama" {
 				fmt.Print("Masukan Nama Pasien yang ingin dicari: ")

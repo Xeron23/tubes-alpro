@@ -100,10 +100,15 @@ func FindDataNama(Arr *Arr, n int, namaS string, pas *bool) {
 }
 
 func FindDataGol(Arr *Arr, n int, gol string, pas *bool) {
-	for i := 0; i < n && !*pas; i++ {
+	var x bool
+	x = true
+	for i := 0; i < n; i++ {
 		if Arr[i].golongan_riwayat_penyakit == gol {
-			fmt.Println("Data ditemukan")
-			fmt.Printf("%s %d %s %s %s", Arr[i].nama, Arr[i].umur, Arr[i].asal, Arr[i].tanggalLahir, Arr[i].golongan_riwayat_penyakit)
+			if  x{
+				fmt.Println("Data ditemukan")
+				x = false
+			}
+			fmt.Printf("%s %d %s %s %s\n", Arr[i].nama, Arr[i].umur, Arr[i].asal, Arr[i].tanggalLahir, Arr[i].golongan_riwayat_penyakit)
 			*pas = true
 		}
 	}
