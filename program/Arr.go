@@ -44,6 +44,11 @@ func InputData(arr *Arr, n int, k *int) {
 			valid = false
 			n = 0
 		}
+		if valid {
+			fmt.Print("Data yang anda masukan telah terkirim ke sistem\n")
+		}else {
+			fmt.Print("Data sudah ada, silahkan masukan data lain\n")
+		}
 		fmt.Print("\n")
 		
 	}
@@ -52,40 +57,45 @@ func InputData(arr *Arr, n int, k *int) {
 
 var Datas Arr
 
-func DeleteData(Arr *Arr, n *int, nama string) {
-	var test bool
-	for i := 0; i < *n || i >= len(Arr); i++ {
-		if Arr[i].nama == nama {
-			copy(Arr[i:], Arr[i+1:*n])
-			Arr[*n-1] = Data{} // Menghapus data terakhir setelah geser
-			*n--
-			test = true
-			break
-		}
-		if !test && i == *n-1 {
-			fmt.Println("Nama tidak ditemukan.")
-		}
-	}
-}
-func DeleteDat(Arr *Arr, n *int, nama string, k *int) {
-	var data int
-	data = Find(*Arr, *n, k, nama)
-	if data != -1 {
-		for i := data; i < *n; i++ {
-			Arr[i] = Arr[i+1]
-		}
-		*n--
-	} else {
-
-	}
-}
+// func DeleteData(Arr *Arr, n *int, nama string) {
+// 	var test bool
+// 	for i := 0; i < *n || i >= len(Arr); i++ {
+// 		if Arr[i].nama == nama {
+// 			copy(Arr[i:], Arr[i+1:*n])
+// 			Arr[*n-1] = Data{} // Menghapus data terakhir setelah geser
+// 			*n--
+// 			test = true
+// 			break
+// 		}
+// 		if !test && i == *n-1 {
+// 			fmt.Println("Nama tidak ditemukan.")
+// 		}
+// 	}
+// }
+// func DeleteDat(Arr *Arr, n *int, nama string, k *int) {
+// 	var data int
+// 	data = Find(*Arr, *n, k, nama)
+// 	if data != -1 {
+// 		fmt.Println("Data ditemukan.")
+// 		for i := data; i < *n; i++ {
+// 			Arr[i] = Arr[i+1]
+// 		}
+// 		*n--
+// 	} else {
+// 		fmt.Println("Nama tidak ditemukan.")
+// 	}
+// }
 
 func FindData(Arr *Arr, n int, namaS string, pas *bool) {
 	for i := 0; i < n && !*pas; i++ {
 		if Arr[i].nama == namaS {
+			fmt.Println("Data ditemukan")
 			fmt.Printf("%s %d %s %s %s", Arr[i].nama, Arr[i].umur, Arr[i].asal, Arr[i].tanggalLahir, Arr[i].golongan_riwayat_penyakit)
 			*pas = true
 		}
+	}
+	if !*pas {
+		fmt.Println("Data tidak ditemukan")
 	}
 }
 
@@ -141,6 +151,7 @@ func EditData(arr *Arr, n int, namaS string, pas *bool) {
 			} else {
 				arr[i].keparahan = 1
 			}
+			*pas = true
 			fmt.Print("\n")
 		}
 	}
