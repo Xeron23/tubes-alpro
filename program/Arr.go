@@ -10,10 +10,13 @@ type Data struct {
 	umur, tanggal, tahun                                       int
 }
 
-type Arr [100]Data
+type Arr [1000]Data
 
-func InputData(arr *Arr, n int) {
-	for i := 0; i < n; i++ {
+func InputData(arr *Arr, n int, k *int) {
+	var valid bool
+	valid = true
+	var i int
+	for i = *k; i < n+*k && valid; i++ {
 		fmt.Println("===================")
 		fmt.Printf("    Pasien ke-%d   \n", i+1)
 		fmt.Println("===================")
@@ -40,9 +43,14 @@ func InputData(arr *Arr, n int) {
 		} else {
 			arr[i].keparahan = 1
 		}
+		if i>0 && arr[i].nama == arr[i-1].nama {
+			valid = false
+			n = 0
+		}
 		fmt.Print("\n")
-
+		
 	}
+	*k += n
 }
 
 var Datas Arr
@@ -208,3 +216,4 @@ func Find(Arr Arr, n int, k *int, nmas string) int {
 	}
 	return *k
 }
+
