@@ -10,7 +10,8 @@ var dataPasien program.Arr
 var namPasien string
 var adaPasien bool
 var henti bool
-var data string
+var data int
+var umur int
 func main() {
 	henti = true
 	banPasien = 0
@@ -19,24 +20,25 @@ func main() {
 		fmt.Scan(&aksi)
 		if aksi == 1 {
 			fmt.Println("\nSILAHKAN MASUKAN DATA PASIEN")
-			program.InputData(&dataPasien,1, &banPasien)
-
+			program.InputData(&dataPasien, 1, &banPasien)
 		} else if aksi == 2 {
 			adaPasien = false
-			fmt.Print("Silahkan pilih berdasarkan nama atau riwayat penyakit: ")
+			fmt.Print("Silahkan pilih berdasarkan 1). nama 2). riwayat penyakit 3).umur\n: ")
 			fmt.Scan(&data)
-			if data == "nama" {
+			if data == 1 {
 				fmt.Print("Masukan Nama Pasien yang ingin dicari: ")
 				fmt.Scan(&namPasien)
 				program.FindDataNama(&dataPasien, banPasien, namPasien, &adaPasien)
 				fmt.Println()
-			}else {
-				fmt.Print("Masukan riwayat penyakit Pasien yang ingin dicari: ")
+			}else if data == 2{
+				fmt.Print("Masukan riwayat penyakit Pasien yang ingin dicari (Parah/Sedang/Ringan): ")
 				fmt.Scan(&namPasien)
 				program.FindDataGol(&dataPasien, banPasien, namPasien, &adaPasien)
+			}else {
+				fmt.Print("Masukan nama pasien berdasarkan umur: ")
+				fmt.Scan(&umur)
+				program.FindDataUmur(&dataPasien, banPasien, umur, &adaPasien)
 			}
-			
-			
 		} else if aksi == 3 {
 			adaPasien = false
 			fmt.Print("Masukan Nama Pasien yang ingin diubah: ")
@@ -57,6 +59,7 @@ func main() {
 			program.UrutAntrian(&dataPasien, banPasien)
 		} else if aksi==6{
 			henti = false
+			fmt.Print("Terimakasi mabrooohhh")
 		}
 	}
 
