@@ -1,0 +1,60 @@
+
+// func InputData(arr *Arr, n int, k *int) {
+// 	var valid bool
+// 	valid = true
+// 	var i int
+// 	for i = *k; i < n+*k; i++ {
+// 		fmt.Print("Masukan nama pasien: ")
+// 		fmt.Scan(&arr[i].nama)
+// 		fmt.Print("Masukan asal pasien: ")
+// 		fmt.Scan(&arr[i].asal)
+// 		fmt.Print("Masukan umur pasien: ")
+// 		fmt.Scan(&arr[i].umur)
+// 		fmt.Println("Masukan tanggal lahir pasien")
+// 		fmt.Print("Tanggal: ")
+// 		fmt.Scan(&arr[i].tanggal)
+// 		fmt.Print("Bulan: ")
+// 		fmt.Scan(&arr[i].bulan)
+// 		fmt.Print("Tahun: ")
+// 		fmt.Scan(&arr[i].tahun)
+// 		arr[i].tanggalLahir = fmt.Sprintf("%d-%s-%d", arr[i].tanggal, arr[i].bulan, arr[i].tahun)
+// 		fmt.Print("Masukan golongan riwayat penyakit pasien: ")
+// 		fmt.Scan(&arr[i].golongan_riwayat_penyakit)
+// 		if arr[i].golongan_riwayat_penyakit == "Parah" {
+// 			arr[i].keparahan = 3
+// 		} else if arr[i].golongan_riwayat_penyakit == "Sedang" {
+// 			arr[i].keparahan = 2
+// 		} else {
+// 			arr[i].keparahan = 1
+// 		}
+// 		for i := 0; i < n+*k; i++ {
+// 			if i > 0 && arr[*k].nama == arr[i-1].nama {
+// 				valid = false
+// 				n = 0
+// 			}
+// 		}
+
+// 		if valid {
+// 			fmt.Print("Data yang anda masukan telah terkirim ke sistem\n")
+// 		} else {
+// 			fmt.Print("Data sudah ada, silahkan masukan data lain\n")
+// 		}
+// 		fmt.Print("\n")
+
+// 	}
+// 	*k += n
+// }
+
+// func HapusData(Arr *Arr, n *int, k *int, nmas string) {
+// 	var result int
+// 	result = Find(*Arr, *n, k, nmas)
+// 	if result != -1 {
+// 		fmt.Println("Data berhasil di hapus")
+// 		for i := result; i < *n-1; i++ {
+// 			Arr[i] = Arr[i+1]
+// 		}
+// 		*n--
+// 	} else {
+// 		fmt.Print("Data tidak di temukan\n")
+// 	}
+// }

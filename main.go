@@ -20,7 +20,7 @@ func main() {
 		fmt.Scan(&aksi)
 		if aksi == 1 {
 			fmt.Println("\nSILAHKAN MASUKAN DATA PASIEN")
-			program.InputData(&dataPasien, 1, &banPasien)
+			program.InputData(&dataPasien, &banPasien)
 		} else if aksi == 2 {
 			adaPasien = false
 			fmt.Print("Silahkan pilih berdasarkan 1). nama 2). riwayat penyakit 3).umur\n: ")
@@ -35,7 +35,7 @@ func main() {
 				fmt.Scan(&namPasien)
 				program.FindDataGol(&dataPasien, banPasien, namPasien, &adaPasien)
 			}else {
-				fmt.Print("Masukan nama pasien berdasarkan umur: ")
+				fmt.Print("Masukan umur pasien yang ingin dicari:  ")
 				fmt.Scan(&umur)
 				program.FindDataUmur(&dataPasien, banPasien, umur, &adaPasien)
 			}
@@ -60,6 +60,8 @@ func main() {
 		} else if aksi==6{
 			henti = false
 			fmt.Print("Terimakasi mabrooohhh")
+		}else {
+			program.PrintData(dataPasien, banPasien)
 		}
 	}
 
