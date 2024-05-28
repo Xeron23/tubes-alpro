@@ -58,3 +58,68 @@
 // 		fmt.Print("Data tidak di temukan\n")
 // 	}
 // }
+
+// func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
+// 	var result int
+// 	result = findBinary(Arr,n,umur)
+// 	if result!= -1 {
+// 		fmt.Println("Data ditemukan")
+// 		fmt.Printf("%s %d %s %s %s\n", Arr[result].nama, Arr[result].umur, Arr[result].asal, Arr[result].tanggalLahir, Arr[result].golongan_riwayat_penyakit)
+// 			*pas = true
+// 	}
+// 	if !*pas {
+// 		fmt.Println("Data tidak ditemukan")
+// 	}
+// }
+
+func findBinary(Arr *Arr, n int, umur int)int {
+	urutUmur(Arr, n)
+	var low, mid, high int
+	var result int
+	result = -1
+	low = 0
+	high= n-1
+	for low<=high && result ==-1{
+		mid = (low + high) /2
+		if Arr[mid].umur == umur{
+			result = mid 
+		}else if Arr[mid].umur < umur {
+			low = mid + 1
+		}else {
+			high = mid - 1
+		}
+	}
+	return result
+}
+
+func urutUmur(Arr *Arr, n int) {
+// 	var pass, i int
+// 	var temps Data
+// 	pass = 1
+// 	for pass < n {
+// 		i = pass
+// 		temps = Arr[i]
+// 		for i>0 && temps.umur < Arr[i-1].umur {
+// 			Arr[i] = Arr[i-1]
+// 			i--
+// 		}
+// 		Arr[i] = temps
+// 		pass++
+// 	}
+// }
+
+// func UrutAntrian(Arr *Arr, n int) {
+// 	var temps Data
+// 	for i := 0; i < n-1; i++ {
+// 		// var j int
+// 		// i = i+1
+// 		for j := i +1; j < n; j++ {
+// 			if Arr[i].keparahan < Arr[j].keparahan {
+// 				temps = Arr[i]
+// 				Arr[i] = Arr[j]
+// 				Arr[j] = temps
+// 			}
+// 		}
+// 	}
+// 	printNama(*Arr, n)
+// }

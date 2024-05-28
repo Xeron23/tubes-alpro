@@ -64,5 +64,4 @@ func main() {
 			program.PrintData(dataPasien, banPasien)
 		}
 	}
-
 }

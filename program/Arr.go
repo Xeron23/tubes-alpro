@@ -13,7 +13,7 @@ type Data struct {
 
 type Arr [1000]Data
 
-
+// input menu 1
 func InputData(arr *Arr, k *int) {
 	var valid bool
 	var valids bool
@@ -60,7 +60,7 @@ func InputData(arr *Arr, k *int) {
 	}
 }
 
-
+// find menu 2
 func FindDataNama(Arr *Arr, n int, namaS string, pas *bool) {
 	for i := 0; i < n && !*pas; i++ {
 		if Arr[i].nama == namaS {
@@ -92,18 +92,7 @@ func FindDataGol(Arr *Arr, n int, gol string, pas *bool) {
 	}
 }
 
-// func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
-// 	var result int
-// 	result = findBinary(Arr,n,umur)
-// 	if result!= -1 {
-// 		fmt.Println("Data ditemukan")
-// 		fmt.Printf("%s %d %s %s %s\n", Arr[result].nama, Arr[result].umur, Arr[result].asal, Arr[result].tanggalLahir, Arr[result].golongan_riwayat_penyakit)
-// 			*pas = true
-// 	}
-// 	if !*pas {
-// 		fmt.Println("Data tidak ditemukan")
-// 	}
-// }
+
 
 func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
 	var x bool
@@ -123,13 +112,7 @@ func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
 	}
 }
 
-// func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
-// 	findBinary(Arr, n, umur, pas)
-// 	if !*pas {
-// 		fmt.Println("Data tidak ditemukan")
-// 	}
-// }
-
+// edit menu 3
 func EditData(arr *Arr, n int, namaS string, pas *bool) {
 	var inStr string
 	var inInt int
@@ -188,45 +171,38 @@ func EditData(arr *Arr, n int, namaS string, pas *bool) {
 	}
 }
 
+// print data
 func PrintData(arr Arr, n int) {
 	for i := 0; i < n; i++ {
 		fmt.Printf("%d. Nama: %s Umur: %d Asal: %s Tanggal Lahir: %s Gol-riwayat: %s\n", i+1, arr[i].nama, arr[i].umur, arr[i].asal, arr[i].tanggalLahir, arr[i].golongan_riwayat_penyakit)
 	}
 }
 
+// test file
 func printNama(Arr Arr, n int) {
 	for i := 0; i < n; i++ {
 		fmt.Printf("%d. Nama: %s Gol: %s\n", i+1, Arr[i].nama, Arr[i].golongan_riwayat_penyakit)
 	}
 }
 
-func urutUmur(Arr *Arr, n int) {
-	var pass, i int
-	var temps Data
-	pass = 1
-	for pass < n {
-		i = pass
-		temps = Arr[i]
-		for i>0 && temps.umur < Arr[i-1].umur {
-			Arr[i] = Arr[i-1]
-			i--
-		}
-		Arr[i] = temps
-		pass++
-	}
-}
+// menurutkan prioritas
 func UrutAntrian(Arr *Arr, n int) {
 	var temps Data
-	for i := 0; i < n-1; i++ {
-		// var j int
-		// i = i+1
-		for j := i +1; j < n; j++ {
-			if Arr[i].keparahan < Arr[j].keparahan {
-				temps = Arr[i]
-				Arr[i] = Arr[j]
-				Arr[j] = temps
+	var pass, idx, i int
+	pass = 1
+	for pass<n {
+		idx = pass-1
+		i = pass
+		for i<n {
+			if Arr[idx].keparahan < Arr[i].keparahan {
+				idx = i
 			}
+			i++
 		}
+		temps = Arr[pass-1]
+		Arr[pass-1] = Arr[idx]
+		Arr[idx] = temps
+		pass++
 	}
 	printNama(*Arr, n)
 }
@@ -274,48 +250,3 @@ func Find(Arr Arr, n int, k *int, nmas string) int {
 	return *k
 }
 
-func findBinary(Arr *Arr, n int, umur int)int {
-	urutUmur(Arr, n)
-	var low, mid, high int
-	var result int
-	result = -1
-	low = 0
-	high= n-1
-	for low<=high && result ==-1{
-		mid = (low + high) /2
-		if Arr[mid].umur == umur{
-			result = mid 
-		}else if Arr[mid].umur < umur {
-			low = mid + 1
-		}else {
-			high = mid - 1
-		}
-	}
-	return result
-}
-
-// func findBinary(Arr *Arr, n int, umur int, pas *bool) {
-// 	urutUmur(Arr, n)
-// 	var low, mid, high int
-// 	var stop bool
-// 	stop = true
-// 	low = 0
-// 	high= n-1
-// 	for low<=high && stop{
-// 		mid = (low + high) /2
-// 		if Arr[mid].umur == umur{
-// 			fmt.Println("Data ditemukan")
-// 			fmt.Printf("%s %d %s %s %s\n", Arr[mid].nama, Arr[mid].umur, Arr[mid].asal, Arr[mid].tanggalLahir, Arr[mid].golongan_riwayat_penyakit)
-// 			*pas = true
-// 			if Arr[mid+1].umur == umur {
-// 				fmt.Printf("%s %d %s %s %s\n", Arr[mid].nama, Arr[mid].umur, Arr[mid].asal, Arr[mid].tanggalLahir, Arr[mid].golongan_riwayat_penyakit)
-// 			}else{
-// 				stop = false
-// 			}
-// 		}else if Arr[mid].umur < umur {
-// 			low = mid + 1
-// 		}else {
-// 			high = mid - 1
-// 		}
-// 	}
-// }
