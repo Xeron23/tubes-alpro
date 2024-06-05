@@ -13,10 +13,23 @@ type Data struct {
 
 type Arr [1000]Data
 
+// keparahan pasien
+func parah(parah string)int {
+	var hasil int
+	if parah == "Parah" {
+		hasil = 3
+	}else if parah == "Sedang" {
+		hasil = 2
+	}else {
+		hasil = 1
+	}
+	return hasil
+}
+
 // input menu 1
 func InputData(arr *Arr, k *int) {
-	var valid bool
-	var valids bool
+	var valid bool // mencetak data valid
+	var valids bool // for stop loop
 	valids = true
 	valid = true
 	for *k<NMAX == valids{
@@ -36,13 +49,8 @@ func InputData(arr *Arr, k *int) {
 		arr[*k].tanggalLahir = fmt.Sprintf("%d-%s-%d", arr[*k].tanggal, arr[*k].bulan, arr[*k].tahun)
 		fmt.Print("Masukan golongan riwayat penyakit pasien: ")
 		fmt.Scan(&arr[*k].golongan_riwayat_penyakit)
-		if arr[*k].golongan_riwayat_penyakit == "Parah" {
-			arr[*k].keparahan = 3
-		} else if arr[*k].golongan_riwayat_penyakit == "Sedang" {
-			arr[*k].keparahan = 2
-		} else {
-			arr[*k].keparahan = 1
-		}
+
+		arr[*k].keparahan = parah(arr[*k].golongan_riwayat_penyakit)
 		*k++
 		valids = false
 		for i := 0; i <*k; i++ {
@@ -61,21 +69,24 @@ func InputData(arr *Arr, k *int) {
 }
 
 // find menu 2
-func FindDataNama(Arr *Arr, n int, namaS string, pas *bool) {
-	for i := 0; i < n && !*pas; i++ {
-		if Arr[i].nama == namaS {
-			fmt.Println("Data ditemukan")
-			fmt.Printf("%s %d %s %s %s", Arr[i].nama, Arr[i].umur, Arr[i].asal, Arr[i].tanggalLahir, Arr[i].golongan_riwayat_penyakit)
-			*pas = true
-		}
+func FindDataNama(Arr *Arr, n int, namaS string) {
+	var hasil int
+	var pas bool
+	pas = false
+	hasil = Find(*Arr, n, namaS)
+	if hasil != -1 {
+		fmt.Println("Data ditemukan")
+			fmt.Printf("%s %d %s %s %s", Arr[hasil].nama, Arr[hasil].umur, Arr[hasil].asal, Arr[hasil].tanggalLahir, Arr[hasil].golongan_riwayat_penyakit)
+			pas = true
 	}
-	if !*pas {
+	if !pas {
 		fmt.Println("Data tidak ditemukan")
 	}
 }
 
-func FindDataGol(Arr *Arr, n int, gol string, pas *bool) {
-	var x bool
+func FindDataGol(Arr *Arr, n int, gol string) {
+	var x, pas bool
+	pas = false
 	x = true
 	for i := 0; i < n; i++ {
 		if Arr[i].golongan_riwayat_penyakit == gol {
@@ -84,18 +95,16 @@ func FindDataGol(Arr *Arr, n int, gol string, pas *bool) {
 				x = false
 			}
 			fmt.Printf("%s %d %s %s %s\n", Arr[i].nama, Arr[i].umur, Arr[i].asal, Arr[i].tanggalLahir, Arr[i].golongan_riwayat_penyakit)
-			*pas = true
+			pas = true
 		}
 	}
-	if !*pas {
+	if !pas {
 		fmt.Println("Data tidak ditemukan")
 	}
 }
 
-
-
-func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
-	var x bool
+func FindDataUmur(Arr *Arr, n,umur int) {
+	var x, pas bool
 	x = true
 	for i := 0; i < n; i++ {
 		if Arr[i].umur == umur {
@@ -104,10 +113,10 @@ func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
 				x = false
 			}
 			fmt.Printf("%s %d %s %s %s\n", Arr[i].nama, Arr[i].umur, Arr[i].asal, Arr[i].tanggalLahir, Arr[i].golongan_riwayat_penyakit)
-			*pas = true
+			pas = true
 		}
 	}
-	if !*pas {
+	if !pas {
 		fmt.Println("Data tidak ditemukan")
 	}
 }
@@ -115,59 +124,50 @@ func FindDataUmur(Arr *Arr, n,umur int, pas *bool) {
 // edit menu 3
 func EditData(arr *Arr, n int, namaS string, pas *bool) {
 	var inStr string
-	var inInt int
-	// scanner := bufio.NewScanner(os.Stdin)
-	for i := 0; i < n && !*pas; i++ {
-		// var inInt int
-		if arr[i].nama == namaS {
-			fmt.Print("Masukan nama pasien (masukan '-' jika tidak ingin dirubah): ")
+	var inInt, hasil int
+	hasil = Find(*arr, n, namaS)
+
+	if hasil != -1 {
+		fmt.Print("Masukan nama pasien (masukan '-' jika tidak ingin dirubah): ")
 			fmt.Scan(&inStr)
 			if inStr != "-" {
-				arr[i].nama = inStr
+				arr[hasil].nama = inStr
 			}
 			fmt.Print("Masukan asal pasien (masukan '-' jika tidak ingin dirubah):")
 			fmt.Scan(&inStr)
 			if inStr != "-" {
-				arr[i].asal = inStr
+				arr[hasil].asal = inStr
 			}
 
 			fmt.Print("Masukan umur pasien (masukan '0' jika tidak ingin dirubah):")
 			fmt.Scan(&inInt)
 			if inInt != 0 {
-				arr[i].umur = inInt
+				arr[hasil].umur = inInt
 			}
 			fmt.Println("Masukan tanggal lahir pasien")
 			fmt.Print("Tanggal (masukan '0' jika tidak ingin dirubah): ")
 			fmt.Scan(&inInt)
 			if inInt != 0 {
-				arr[i].tanggal = inInt
+				arr[hasil].tanggal = inInt
 			}
 			fmt.Print("Bulan (masukan '-' jika tidak ingin dirubah):")
 			fmt.Scan(&inStr)
 			if inStr != "-" {
-				arr[i].bulan = inStr
+				arr[hasil].bulan = inStr
 			}
 			fmt.Print("Tahun (masukan '0' jika tidak ingin dirubah): ")
 			fmt.Scan(&inInt)
 			if inInt != 0 {
-				arr[i].tahun = inInt
+				arr[hasil].tahun = inInt
 			}
-			arr[i].tanggalLahir = fmt.Sprintf("%d-%s-%d", arr[i].tanggal, arr[i].bulan, arr[i].tahun)
+			arr[hasil].tanggalLahir = fmt.Sprintf("%d-%s-%d", arr[hasil].tanggal, arr[hasil].bulan, arr[hasil].tahun)
 			fmt.Print("Masukan golongan riwayat penyakit pasien (masukan '-' jika tidak ingin dirubah): ")
 			fmt.Scan(&inStr)
 			if inStr != "-" {
-				arr[i].golongan_riwayat_penyakit = inStr
+				arr[hasil].golongan_riwayat_penyakit = inStr
 			}
-			if arr[i].golongan_riwayat_penyakit == "Parah" {
-				arr[i].keparahan = 3
-			} else if arr[i].golongan_riwayat_penyakit == "Sedang" {
-				arr[i].keparahan = 2
-			} else {
-				arr[i].keparahan = 1
-			}
+			arr[hasil].keparahan = parah(arr[hasil].golongan_riwayat_penyakit)
 			*pas = true
-			fmt.Print("\n")
-		}
 	}
 }
 
@@ -194,7 +194,7 @@ func UrutAntrian(Arr *Arr, n int) {
 		idx = pass-1
 		i = pass
 		for i<n {
-			if Arr[idx].keparahan < Arr[i].keparahan {
+			if (Arr[idx].keparahan < Arr[i].keparahan) || (i>0 && Arr[idx].keparahan == Arr[i].keparahan && Arr[i].umur > Arr[idx].umur){
 				idx = i
 			}
 			i++
@@ -207,6 +207,38 @@ func UrutAntrian(Arr *Arr, n int) {
 	printNama(*Arr, n)
 }
 
+
+
+func HapusData(Arr *Arr, n *int, nmas string) {
+	var hasil int
+	hasil = Find(*Arr, *n, nmas)
+
+	if hasil != -1 {
+		fmt.Println("Data berhasil di hapus")
+		for i := hasil; i < *n-1; i++ {
+			Arr[i] = Arr[i+1]
+		}
+		*n--
+	} else {
+		fmt.Print("Data tidak di temukan\n")
+	}
+}
+
+// search
+func Find(Arr Arr, n int, nmas string) int {
+	var hasil, i int
+	hasil = -1
+	i = 0
+	for i < n && hasil==-1{
+		if Arr[i].nama == nmas {
+			hasil = i
+		}
+		i++
+	}
+	return hasil
+}
+
+// interface
 func Interface() {
 	fmt.Println("*************************************")
 	fmt.Println("*                                   *")
@@ -225,28 +257,3 @@ func Interface() {
 	fmt.Println("*************************************")
 	fmt.Print("Silahkan Pilih Menu : ")
 }
-
-
-func HapusData(Arr *Arr, n *int, k *int, nmas string) {
-	Find(*Arr, *n, k, nmas)
-	if *k != -1 {
-		fmt.Println("Data berhasil di hapus")
-		for i := *k; i < *n-1; i++ {
-			Arr[i] = Arr[i+1]
-		}
-		*n--
-	} else {
-		fmt.Print("Data tidak di temukan\n")
-	}
-}
-
-func Find(Arr Arr, n int, k *int, nmas string) int {
-	*k = -1
-	for i := 0; i < n && *k==-1; i++ {
-		if Arr[i].nama == nmas {
-			*k = i
-		}
-	}
-	return *k
-}
-

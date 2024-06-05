@@ -121,5 +121,5 @@ func urutUmur(Arr *Arr, n int) {
 // 			}
 // 		}
 // 	}
-// 	printNama(*Arr, n)
+// printNama(*Arr, n)
 // }
